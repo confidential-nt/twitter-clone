@@ -1,0 +1,9 @@
+@value twitterBlack, twitterWhite from "./common/colors.css";
+
+.main {
+  background-color: twitterBlack;
+  color: twitterWhite;
+  height: 48rem;
+  min-height: 48rem;
+  position: relative;
+}
