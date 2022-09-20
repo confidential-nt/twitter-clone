@@ -1,0 +1,59 @@
+@value twitterBlack, twitterGrey, twitterWhite, twitterBlue from "../../common/colors.css";
+
+.input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  z-index: 0;
+}
+
+.input:focus {
+  outline: none;
+  border: none;
+}
+
+.inputContainer {
+  position: relative;
+  font-size: 1.1rem;
+  cursor: text;
+  background-color: twitterBlack;
+  border: 1px solid twitterGrey;
+  border-radius: 0.2rem;
+  width: 100%;
+  color: twitterWhite;
+}
+
+.inputContainer:focus {
+  outline: 1px solid twitterBlue;
+}
+
+.flexContainer {
+  position: relative;
+  display: flex;
+}
+
+.fakeInput {
+  height: 3rem;
+  padding: 0.5em;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  order: 2;
+}
+
+.fakeInput:focus {
+  outline: 1px solid twitterBlue;
+}
+
+.placeholder {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.5em;
+  color: twitterGrey;
+  z-index: 0;
+}
