@@ -1,0 +1,105 @@
+@value twitterDarkerBlue, twitterDarkerWhite, twitterGrey from "../../common/colors.css";
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.img {
+  flex-basis: 50%;
+  position: relative;
+  order: 0;
+}
+
+.img img {
+  width: 100%;
+  height: 100%;
+}
+
+.imgTwitterIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20rem;
+  height: 20rem;
+}
+
+.loginContainer {
+  flex-basis: 50%;
+  padding: 1.8rem;
+  order: 1;
+}
+
+.loginTwitterIcon {
+  margin-bottom: 1.5em;
+}
+
+.title {
+  font-size: 4.8rem;
+  margin-bottom: 1em;
+}
+
+.title + strong {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1em;
+}
+
+.loginBtnContainer span {
+  display: flex;
+  width: 18rem;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.loginBtnContainer span::before {
+  content: "";
+  display: block;
+  height: 0.1rem;
+  width: 10%;
+  background-color: twitterGrey;
+  margin-right: 0.4rem;
+  flex-grow: 1;
+}
+.loginBtnContainer span::after {
+  content: "";
+  display: block;
+  height: 0.1rem;
+  width: 10%;
+  background-color: twitterGrey;
+  margin-left: 0.4rem;
+  flex-grow: 1;
+}
+
+.googleLoginBtn,
+.githubLoginBtn,
+.twitterLoginBtn {
+  width: 18rem;
+}
+
+.googleLoginBtn {
+  margin-bottom: 0.5rem;
+}
+
+.googleLoginBtn:hover {
+  background-color: twitterDarkerWhite;
+}
+
+.githubLoginBtn {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.githubLoginBtn:hover {
+  background-color: twitterDarkerWhite;
+}
+
+.twitterLoginBtn {
+  font-weight: 700;
+}
+
+.twitterLoginBtn:hover {
+  background-color: twitterDarkerBlue;
+}
