@@ -1,0 +1,40 @@
+@value twitterBlue, twitterWhite, twitterBlack, twitterGrey from "../../common/colors.css";
+
+.btn {
+  display: block;
+  border-radius: 2em;
+  padding: 0.8em;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  background-color: twitterGrey;
+  transition: none;
+}
+
+.btn:disabled:hover {
+  background-color: twitterGrey;
+}
+
+.btnLogo {
+  margin-right: 0.5em;
+}
+
+.btn-bg-blue {
+  background-color: twitterBlue;
+}
+
+.btn-bg-white {
+  background-color: twitterWhite;
+}
+
+.btn-font-black {
+  color: twitterBlack;
+}
+
+.btn-font-white {
+  color: twitterWhite;
+}
