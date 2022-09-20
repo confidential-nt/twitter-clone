@@ -1,0 +1,34 @@
+@value twitterBlue from "../../common/colors.css";
+
+.message {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: twitterBlue;
+  padding: 0.5em;
+  font-size: 1.2rem;
+  border-radius: 0.5em;
+  animation: elevateMessage ease-in-out 7s;
+  z-index: 4;
+}
+
+@keyframes elevateMessage {
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+    top: 60%;
+  }
+
+  80% {
+    opacity: 1;
+    top: 60%;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

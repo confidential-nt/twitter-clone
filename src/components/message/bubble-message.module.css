@@ -1,0 +1,23 @@
+@value twitterBlue from "../../common/colors.css";
+
+.message {
+  position: absolute;
+  top: -10%;
+  right: -20%;
+  background-color: twitterBlue;
+  padding: 0.5em;
+  border-radius: 1em 1em 1em 0;
+  animation: showMessage ease-in-out 1s forwards;
+}
+
+@keyframes showMessage {
+  0% {
+    opacity: 0;
+    right: -25%;
+  }
+
+  100% {
+    opacity: 1;
+    right: -30%;
+  }
+}
