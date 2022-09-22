@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import SquareMessage from "../message/square-message";
 import Input from "../input/input";
 import Button from "../button/button";
 import Auth, { ResultState } from "../../service/auth";
@@ -58,12 +57,14 @@ const LoginForm = ({ auth, onSubmitForm }: Props) => {
           placeholder="사용자 이메일을 입력하세요."
           type="email"
           onInputListener={onInput}
+          inputRef={useRef<HTMLDivElement>(null)}
         />
         <Input
           className={styles.input}
           type="password"
           placeholder="비밀번호를 입력하세요."
           onInputListener={onInput}
+          inputRef={useRef<HTMLInputElement>(null)}
         />
         <Button
           textContent="로그인하기"

@@ -42,7 +42,6 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  order: 2;
 }
 
 .fakeInput:focus {
@@ -56,4 +55,21 @@
   left: 0.5em;
   color: twitterGrey;
   z-index: 0;
+}
+
+.passwordInput {
+  height: 3rem;
+  padding: 0.5em;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  display: block;
+  background-color: twitterBlack;
+  border: none;
+  font-size: 1.1rem;
+  color: twitterWhite;
+}
+
+.passwordInput:focus {
+  outline: 1px solid twitterBlue;
 }

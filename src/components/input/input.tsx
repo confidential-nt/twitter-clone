@@ -1,15 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./input.module.css";
 import BubbleMessage from "../message/bubble-message";
 import { LoginInfo } from "../login-form/login-form";
-import PasswordHider from "../password-hider/password-hider";
 
 type Props = {
   type: React.HTMLInputTypeAttribute;
   name?: string;
   placeholder?: string;
   className?: string;
-
+  inputRef: React.RefObject<HTMLInputElement | HTMLDivElement>;
   onInputListener?: (loginInfo: LoginInfo) => void;
   tabIndex?: number;
 };
@@ -19,16 +18,12 @@ const Input = ({
   name,
   placeholder,
   className,
-
+  inputRef,
   onInputListener,
   tabIndex,
 }: Props) => {
   const [blank, setBlank] = useState(true);
   const [inputMessage, setInputMessage] = useState<string>("");
-
-  const inputRef = useRef<HTMLDivElement>(null);
-
-  const [displayPasswordHider, setdisplayPasswordHider] = useState("");
 
   const isValidateEmail = (email: string) => {
     return Boolean(
@@ -54,19 +49,24 @@ const Input = ({
 
   const onInput = (e: any) => {
     if (!inputRef.current) return;
-    if (inputRef.current.textContent) {
-      const textContent = inputRef.current.textContent;
+
+    let current;
+    let value;
+    if (type === "password") {
+      current = inputRef.current! as HTMLInputElement;
+      value = current.value;
+    } else {
+      current = inputRef.current! as HTMLDivElement;
+      value = current.textContent;
+    }
+
+    if (value) {
+      const text = value;
 
       setBlank(false);
-      isValidate(textContent);
-      onInputListener &&
-        onInputListener({ infoType: type, value: textContent });
-
-      if (type === "password") {
-        setdisplayPasswordHider(textContent);
-      }
+      isValidate(text);
+      onInputListener && onInputListener({ infoType: type, value: text });
     } else {
-      setdisplayPasswordHider("");
       setBlank(true);
       setInputMessage("값을 입력해주세요.");
     }
@@ -83,23 +83,28 @@ const Input = ({
       tabIndex={tabIndex ? tabIndex : 0}
       onInput={onInput}
     >
-      {placeholder && blank && (
+      {type !== "password" && blank && (
         <label htmlFor="input" className={styles.placeholder}>
-          {placeholder}
+          {placeholder ? placeholder : ""}
         </label>
       )}
-      <div className={styles.flexContainer}>
+
+      {type === "password" ? (
+        <input
+          type="password"
+          className={styles.passwordInput}
+          ref={inputRef! as React.RefObject<HTMLInputElement>}
+          placeholder="비밀번호를 입력하세요."
+        />
+      ) : (
         <div
           className={styles.fakeInput}
           id="input"
           contentEditable
-          ref={inputRef}
+          ref={inputRef! as React.RefObject<HTMLDivElement>}
         ></div>
-        <PasswordHider
-          value={displayPasswordHider}
-          className={styles.passwordHider}
-        />
-      </div>
+      )}
+
       <BubbleMessage message={inputMessage} />
     </div>
   );
