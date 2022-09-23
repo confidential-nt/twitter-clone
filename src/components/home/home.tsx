@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Auth from "../../service/auth";
 import { firebaseAuth } from "../../service/firebase";
 
-type Props = { auth: Auth };
+type Props = { auth: Auth; onToggleModal: (modalState: boolean) => void };
 
-const Home = ({ auth }: Props) => {
+const Home = ({ auth, onToggleModal }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
   //   const state = location.state as { userId?: string };
@@ -23,6 +23,7 @@ const Home = ({ auth }: Props) => {
       <button
         onClick={() => {
           auth.logout();
+          onToggleModal(false);
         }}
       >
         Logout

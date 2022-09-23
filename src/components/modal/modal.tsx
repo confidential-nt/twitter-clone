@@ -39,4 +39,4 @@ export default Modal;
 // 5. 이메일인풋-패스워드 인풋을 구분해볼수도. 인풋을 확장해서.
 // 6. 선생님이 알려준 컴포넌트 라이브러리 공부 -> 스타일을 어떻게 외부에서 적용하는지..
 // 7. input에 지저분하게 있는 validation도 정리를 해 볼 수 있을 것.
-// 8. 모달 개선 -> 각각의 모달이 독립적으로 움직이도록.
+// 8. https://github.com/reactjs/react-modal/blob/master/src/components/Modal.js

@@ -31,7 +31,10 @@ function App({ auth }: Props) {
   return (
     <main className={styles.main}>
       <Routes>
-        <Route path="/home" element={<Home auth={auth} />}></Route>
+        <Route
+          path="/home"
+          element={<Home auth={auth} onToggleModal={onToggleModal} />}
+        ></Route>
         <Route
           path="/login"
           element={
