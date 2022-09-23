@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./input.module.css";
 import BubbleMessage from "../message/bubble-message";
 import { LoginInfo } from "../login-form/login-form";
@@ -15,7 +15,7 @@ type Props = {
 
 const Input = ({
   type,
-  name,
+  name = "",
   placeholder,
   className,
   inputRef,
@@ -95,11 +95,13 @@ const Input = ({
           className={styles.passwordInput}
           ref={inputRef! as React.RefObject<HTMLInputElement>}
           placeholder="비밀번호를 입력하세요."
+          name={name}
         />
       ) : (
         <div
           className={styles.fakeInput}
           id="input"
+          data-name={name}
           contentEditable
           ref={inputRef! as React.RefObject<HTMLDivElement>}
         ></div>

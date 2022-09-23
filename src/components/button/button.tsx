@@ -1,9 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { brands } from "@fortawesome/fontawesome-svg-core/import.macro";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./button.module.css";
-import Auth, { ResultState } from "../../service/auth";
-import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
 
 type Props = {
@@ -14,7 +11,7 @@ type Props = {
   btnBackgroundColor?: "btn-bg-blue" | "btn-bg-white";
   btnFontColor?: "btn-font-black" | "btn-font-white";
   className?: string;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   clickable: boolean;
 };
 

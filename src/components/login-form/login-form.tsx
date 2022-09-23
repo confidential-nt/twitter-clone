@@ -39,7 +39,7 @@ const LoginForm = ({ auth, onSubmitForm }: Props) => {
           setPassword(loginInfo.value);
           break;
       }
-      console.log(email, password);
+
       if (email && password) {
         setloginable(true);
       } else {
@@ -58,6 +58,7 @@ const LoginForm = ({ auth, onSubmitForm }: Props) => {
           type="email"
           onInputListener={onInput}
           inputRef={useRef<HTMLDivElement>(null)}
+          name="email"
         />
         <Input
           className={styles.input}
@@ -65,6 +66,7 @@ const LoginForm = ({ auth, onSubmitForm }: Props) => {
           placeholder="비밀번호를 입력하세요."
           onInputListener={onInput}
           inputRef={useRef<HTMLInputElement>(null)}
+          name="password"
         />
         <Button
           textContent="로그인하기"

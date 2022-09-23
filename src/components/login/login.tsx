@@ -13,11 +13,16 @@ type Props = {
   auth: Auth;
   errorPopupState: string | null;
   onUpdateErrorPopupState: (errorMessage: string) => void;
+  onToggleModal: (modalState: boolean) => void;
+  displayModal: boolean;
 };
 
-export const Login = ({ auth, onUpdateErrorPopupState }: Props) => {
-  const [displayModal, setModalDisplay] = useState<boolean>(false);
-
+export const Login = ({
+  auth,
+  onUpdateErrorPopupState,
+  displayModal,
+  onToggleModal,
+}: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,9 +64,9 @@ export const Login = ({ auth, onUpdateErrorPopupState }: Props) => {
 
   const toggleModal = () => {
     if (!displayModal) {
-      setModalDisplay(true);
+      onToggleModal(true);
     } else {
-      setModalDisplay(false);
+      onToggleModal(false);
     }
   };
 

@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/login/login";
 import Home from "./components/home/home";
 import Auth from "./service/auth";
 import styles from "./app.module.css";
 import SquareMessage from "./components/message/square-message";
+import { getErrorMessage } from "./other/error";
+import useScroll from "./hook/use-scroll";
 
 type Props = { auth: Auth };
 
 function App({ auth }: Props) {
   const [errorPopupState, setErrorPopupState] = useState<string>("");
+  const [displayModal, setModalDisplay] = useState<boolean>(false);
+
+  useScroll(displayModal);
 
   const updateErrorPopupState = (errorMessage: string) => {
     setErrorPopupState(errorMessage);
+  };
+
+  const onToggleModal = (modalState: boolean) => {
+    if (!modalState) {
+      setModalDisplay(false);
+    } else {
+      setModalDisplay(true);
+    }
   };
 
   return (
@@ -26,6 +39,8 @@ function App({ auth }: Props) {
               auth={auth}
               errorPopupState={errorPopupState}
               onUpdateErrorPopupState={updateErrorPopupState}
+              onToggleModal={onToggleModal}
+              displayModal={displayModal}
             />
           }
         ></Route>
@@ -36,11 +51,13 @@ function App({ auth }: Props) {
               auth={auth}
               errorPopupState={errorPopupState}
               onUpdateErrorPopupState={updateErrorPopupState}
+              onToggleModal={onToggleModal}
+              displayModal={displayModal}
             />
           }
         ></Route>
       </Routes>
-      {errorPopupState && <SquareMessage message={errorPopupState} />}
+      <SquareMessage message={getErrorMessage(errorPopupState)} />
     </main>
   );
 }
