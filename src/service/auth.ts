@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   NextOrObserver,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   User,
@@ -41,6 +42,26 @@ class Auth {
   }
 
   async loginWithEmailandPassword(
+    email: string,
+    password: string
+  ): Promise<ResultState> {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password
+      );
+      return {
+        state: "success",
+        user: userCredential.user,
+      };
+    } catch (error: any | unknown) {
+      console.log(error.code);
+      return { state: "fail", reason: error.code };
+    }
+  }
+
+  async joinWithEmailAndPassword(
     email: string,
     password: string
   ): Promise<ResultState> {
