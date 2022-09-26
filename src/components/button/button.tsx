@@ -13,6 +13,7 @@ type Props = {
   className?: string;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   clickable: boolean;
+  id?: string;
 };
 
 const Button = ({
@@ -25,6 +26,7 @@ const Button = ({
   className,
   type,
   clickable,
+  id,
 }: Props) => {
   return (
     <button
@@ -35,6 +37,7 @@ const Button = ({
       onClick={onClick}
       type={type ? type : "button"}
       disabled={!clickable}
+      id={id ? id : ""}
     >
       {font && <FontAwesomeIcon icon={font} className={styles.btnLogo} />}
       {textContent}

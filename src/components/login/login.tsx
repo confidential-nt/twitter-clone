@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./login.module.css";
 import Modal from "../modal/modal";
 import LoginForm from "../login-form/login-form";
+import JoinForm from "../join-form/join-form";
 import Button from "../button/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { brands } from "@fortawesome/fontawesome-svg-core/import.macro";
 import Auth, { ResultState } from "../../service/auth";
 import { useNavigate } from "react-router-dom";
 import { User } from "firebase/auth";
+import { getTimeStampArr } from "../../other/timestamp";
 
 type Props = {
   auth: Auth;
@@ -17,13 +19,16 @@ type Props = {
   displayModal: boolean;
 };
 
+const ITEM_IDS = getTimeStampArr(2);
+
 export const Login = ({
   auth,
   onUpdateErrorPopupState,
-  displayModal,
   onToggleModal,
 }: Props) => {
   const navigate = useNavigate();
+
+  const [currentItemId, setCurrentItemId] = useState<string | null>(null);
 
   useEffect(() => {
     auth.handleStateChange((user) => {
@@ -45,7 +50,7 @@ export const Login = ({
     }
   };
 
-  const onTryLogin = (result: ResultState) => {
+  const onTryAuthentication = (result: ResultState) => {
     if (result.state === "success") goToHome(result.user);
     else {
       setTimeout(() => onUpdateErrorPopupState(""), 7000);
@@ -55,17 +60,25 @@ export const Login = ({
 
   const onClickBtn = async (e: any) => {
     const result = await auth.providerLogin(e.target.name);
-    onTryLogin(result);
+    onTryAuthentication(result);
   };
 
-  const onSubmit = async (result: ResultState) => {
-    onTryLogin(result);
+  const onLoginSubmit = async (result: ResultState) => {
+    onTryAuthentication(result);
   };
 
-  const toggleModal = () => {
-    if (!displayModal) {
+  const onJoinSubmit = async (result: ResultState) => {
+    onTryAuthentication(result);
+  };
+
+  const toggleModal = (e: React.PointerEvent<HTMLButtonElement>) => {
+    const target = e.target! as HTMLButtonElement;
+
+    if (!currentItemId) {
+      setCurrentItemId(target.id);
       onToggleModal(true);
     } else {
+      setCurrentItemId(null);
       onToggleModal(false);
     }
   };
@@ -105,35 +118,46 @@ export const Login = ({
           <Button
             textContent="이메일 주소로 가입하기"
             font={brands("twitter")}
-            buttonName="Twitter"
+            buttonName="JoinTwitter"
             onClick={toggleModal}
             btnBackgroundColor={"btn-bg-blue"}
             btnFontColor={"btn-font-white"}
             className={styles.twitterJoinBtn}
             clickable={true}
+            id={ITEM_IDS[0]}
           />
           <span className={styles.ask}>이미 트위터에 가입하셨나요?</span>
           <Button
             textContent="로그인"
-            buttonName="Twitter"
+            buttonName="LoginTwitter"
             onClick={toggleModal}
             btnBackgroundColor={"btn-bg-black"}
             btnFontColor={"btn-font-blue"}
             className={styles.twitterLoginBtn}
             clickable={true}
+            id={ITEM_IDS[1]}
           />
         </div>
         <Modal
-          display={displayModal}
-          component={
-            <LoginForm
-              auth={auth}
-              onSubmitForm={onSubmit}
-              onUpdateErrorPopupState={onUpdateErrorPopupState}
-            />
-          }
+          display={currentItemId === ITEM_IDS[0]}
           closeListener={toggleModal}
-        />
+        >
+          <JoinForm
+            auth={auth}
+            onSubmitForm={onJoinSubmit}
+            onUpdateErrorPopupState={onUpdateErrorPopupState}
+          />
+        </Modal>
+        <Modal
+          display={currentItemId === ITEM_IDS[1]}
+          closeListener={toggleModal}
+        >
+          <LoginForm
+            auth={auth}
+            onSubmitForm={onLoginSubmit}
+            onUpdateErrorPopupState={onUpdateErrorPopupState}
+          />
+        </Modal>
       </div>
       <div className={styles.img}>
         <FontAwesomeIcon

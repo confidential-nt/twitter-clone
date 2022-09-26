@@ -3,15 +3,16 @@ import styles from "./modal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { brands } from "@fortawesome/fontawesome-svg-core/import.macro";
 
-type onCloseListener = () => void;
+type onCloseListener = (e: React.PointerEvent<HTMLButtonElement>) => void;
 
 type Props = {
-  component: JSX.Element;
   closeListener: onCloseListener;
   display: boolean;
+  children?: React.ReactNode;
+  // buttonRef: React.Ref<HTMLButtonElement>;
 };
 
-const Modal = ({ component, closeListener, display }: Props) => {
+const Modal = ({ closeListener, display, children }: Props) => {
   return display ? (
     <div className={styles.modalShade}>
       <div className={styles.modalContainer}>
@@ -25,7 +26,7 @@ const Modal = ({ component, closeListener, display }: Props) => {
         <header className={styles.headerLogo}>
           <FontAwesomeIcon icon={brands("twitter")} size={"2x"} />
         </header>
-        <div className={styles.content}>{component}</div>
+        <div className={styles.content}>{children}</div>
       </div>
     </div>
   ) : null;
@@ -40,3 +41,6 @@ export default Modal;
 
 // 8. https://github.com/reactjs/react-modal/blob/master/src/components/Modal.js
 // 9. 반응형
+
+// 1212. 타입도 나중에 수정해야할듯. 치트시트 보면서
+// 23123. 중복로직 줄이기

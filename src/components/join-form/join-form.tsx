@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
-
+import React, { useReducer, useRef, useState } from "react";
 import Button from "../button/button";
-import Auth, { ResultState } from "../../service/auth";
-import styles from "./login-form.module.css";
-import moduleStyles from "../../css-module/modal-form.module.css";
 import EmailInput from "../input/email-input";
 import PasswordInput from "../input/password-input";
+import styles from "./join-form.module.css";
+import moduleStyles from "../../css-module/modal-form.module.css";
+import Auth, { ResultState } from "../../service/auth";
 
 type Props = {
   auth: Auth;
@@ -13,9 +12,8 @@ type Props = {
   onUpdateErrorPopupState: (errorMessage: string) => void;
 };
 
-// 사람들이 이 컴포넌트를 로그인 폼을 만들기 위해 사용한다고 생각해보면...
-const LoginForm = ({ auth, onSubmitForm, onUpdateErrorPopupState }: Props) => {
-  const [isLoginable, setloginable] = useState(false);
+const JoinForm = ({ auth, onSubmitForm, onUpdateErrorPopupState }: Props) => {
+  const [isJoinable, setJoinable] = useState<boolean>(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +25,7 @@ const LoginForm = ({ auth, onSubmitForm, onUpdateErrorPopupState }: Props) => {
     e.preventDefault();
 
     if (email && password) {
-      const result = await auth.loginWithEmailandPassword(email, password);
+      const result = await auth.joinWithEmailAndPassword(email, password);
       onSubmitForm(result);
     } else {
       onUpdateErrorPopupState("잘못된 접근입니다.");
@@ -36,8 +34,8 @@ const LoginForm = ({ auth, onSubmitForm, onUpdateErrorPopupState }: Props) => {
 
   const onInput = () => {
     if (emailRef.current?.textContent && passwordRef.current?.value) {
-      setloginable(true);
-    } else setloginable(false);
+      setJoinable(true);
+    } else setJoinable(false);
   };
 
   const onEmailInput = () => {
@@ -51,32 +49,32 @@ const LoginForm = ({ auth, onSubmitForm, onUpdateErrorPopupState }: Props) => {
   };
 
   return (
-    <div className={styles.loginFormContainer}>
-      <h2 className={moduleStyles.formTitle}>트위터에 로그인하기</h2>
-      <form onSubmit={onSubmit} onInput={onInput} className={moduleStyles.form}>
+    <div className={styles.joinFormContainer}>
+      <h2 className={moduleStyles.formTitle}>트위터에 가입하기</h2>
+      <form className={moduleStyles.form} onSubmit={onSubmit} onInput={onInput}>
         <EmailInput
           className={moduleStyles.input}
           placeholder="사용자 이메일을 입력하세요."
-          onInputListener={onEmailInput}
-          inputRef={emailRef}
           name="email"
+          inputRef={emailRef}
+          onInputListener={onEmailInput}
         />
         <PasswordInput
           className={moduleStyles.input}
           placeholder="비밀번호를 입력하세요."
-          onInputListener={onPasswordInput}
-          inputRef={passwordRef}
           name="password"
+          inputRef={passwordRef}
+          onInputListener={onPasswordInput}
         />
         <Button
-          textContent="로그인하기"
+          textContent="가입하기"
           type="submit"
           className={moduleStyles.btn}
-          clickable={isLoginable ? true : false}
+          clickable={isJoinable ? true : false}
         />
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default JoinForm;
