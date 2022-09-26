@@ -80,7 +80,7 @@ export const Login = ({
         />
         <h2 className={styles.title}>지금 일어나고 있는 일</h2>
         <strong>오늘 트위터에 가입하세요.</strong>
-        <div className={styles.loginBtnContainer}>
+        <div className={styles.btnContainer}>
           <Button
             textContent="Google 계정으로 로그인"
             font={brands("google")}
@@ -101,14 +101,24 @@ export const Login = ({
             className={styles.githubLoginBtn}
             clickable={true}
           />
-          <span>또는</span>
+          <span className={styles.or}>또는</span>
           <Button
-            textContent="기존 이메일 / 비밀번호로 로그인"
+            textContent="이메일 주소로 가입하기"
             font={brands("twitter")}
             buttonName="Twitter"
             onClick={toggleModal}
             btnBackgroundColor={"btn-bg-blue"}
             btnFontColor={"btn-font-white"}
+            className={styles.twitterJoinBtn}
+            clickable={true}
+          />
+          <span className={styles.ask}>이미 트위터에 가입하셨나요?</span>
+          <Button
+            textContent="로그인"
+            buttonName="Twitter"
+            onClick={toggleModal}
+            btnBackgroundColor={"btn-bg-black"}
+            btnFontColor={"btn-font-blue"}
             className={styles.twitterLoginBtn}
             clickable={true}
           />

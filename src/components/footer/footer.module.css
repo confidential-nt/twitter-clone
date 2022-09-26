@@ -1,0 +1,21 @@
+@value twitterBlack, twitterGrey from "../../common/colors.css";
+
+.footer {
+  background-color: twitterBlack;
+  color: twitterGrey;
+  padding: 1em 0;
+}
+
+.items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.items li {
+  list-style: none;
+}
+
+.items li a {
+  text-decoration: none;
+  color: inherit;
+}

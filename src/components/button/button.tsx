@@ -8,8 +8,8 @@ type Props = {
   font?: IconDefinition;
   buttonName?: Capitalize<string>;
   onClick?: (e?: any) => void;
-  btnBackgroundColor?: "btn-bg-blue" | "btn-bg-white";
-  btnFontColor?: "btn-font-black" | "btn-font-white";
+  btnBackgroundColor?: "btn-bg-blue" | "btn-bg-white" | "btn-bg-black";
+  btnFontColor?: "btn-font-black" | "btn-font-white" | "btn-font-blue";
   className?: string;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   clickable: boolean;

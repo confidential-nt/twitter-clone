@@ -1,6 +1,6 @@
 @value twitterBlue, twitterWhite, twitterBlack, twitterGrey from "../../common/colors.css";
 
-.btn {
+button {
   display: block;
   border-radius: 2em;
   padding: 0.8em;
@@ -31,10 +31,18 @@
   background-color: twitterWhite;
 }
 
+.btn-bg-black {
+  background-color: twitterBlack;
+}
+
 .btn-font-black {
   color: twitterBlack;
 }
 
 .btn-font-white {
   color: twitterWhite;
+}
+
+.btn-font-blue {
+  color: twitterBlue;
 }

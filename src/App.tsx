@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/login/login";
+import Footer from "./components/footer/footer";
 import Home from "./components/home/home";
 import Auth from "./service/auth";
 import styles from "./app.module.css";
@@ -63,25 +64,7 @@ function App({ auth }: Props) {
         </Routes>
         <SquareMessage message={getErrorMessage(errorPopupState)} />
       </main>
-      <footer>
-        <ul>
-          <li>
-            <a href="#">소개</a>
-          </li>
-          <li>
-            <a href="#">고객센터</a>
-          </li>
-          <li>
-            <a href="#">이용약관</a>
-          </li>
-          <li>
-            <a href="#">쿠키정책</a>
-          </li>
-          <li>
-            <a href="#">광고정보</a>
-          </li>
-        </ul>
-      </footer>
+      <Footer />
     </>
   );
 }

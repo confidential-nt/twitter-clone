@@ -1,4 +1,4 @@
-@value twitterDarkerBlue, twitterDarkerWhite, twitterGrey from "../../common/colors.css";
+@value twitterDarkerBlue, twitterDarkerWhite, twitterGrey, twiiterDeepDarkerBlue from "../../common/colors.css";
 @value mediaQuery from "../../common/size.css";
 
 .container {
@@ -14,6 +14,7 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
+  min-height: 48rem;
 }
 
 .imgTwitterIcon {
@@ -21,7 +22,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 20rem;
+  width: 23vw;
   height: 20rem;
 }
 
@@ -46,7 +47,7 @@
   margin-bottom: 1em;
 }
 
-.loginBtnContainer span {
+.btnContainer .or {
   display: flex;
   width: 18rem;
   text-align: center;
@@ -54,7 +55,7 @@
   margin-bottom: 0.5rem;
 }
 
-.loginBtnContainer span::before {
+.btnContainer .or::before {
   content: "";
   display: block;
   height: 0.1rem;
@@ -63,7 +64,7 @@
   margin-right: 0.4rem;
   flex-grow: 1;
 }
-.loginBtnContainer span::after {
+.btnContainer .or::after {
   content: "";
   display: block;
   height: 0.1rem;
@@ -75,6 +76,7 @@
 
 .googleLoginBtn,
 .githubLoginBtn,
+.twitterJoinBtn,
 .twitterLoginBtn {
   width: 18rem;
 }
@@ -96,12 +98,28 @@
   background-color: twitterDarkerWhite;
 }
 
-.twitterLoginBtn {
+.twitterJoinBtn {
   font-weight: 700;
+  margin-bottom: 5em;
+}
+
+.twitterJoinBtn:hover {
+  background-color: twitterDarkerBlue;
+}
+
+.twitterLoginBtn {
+  border: 1px solid twitterGrey;
 }
 
 .twitterLoginBtn:hover {
-  background-color: twitterDarkerBlue;
+  background-color: twiiterDeepDarkerBlue;
+}
+
+.ask {
+  display: block;
+  margin-bottom: 1em;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 @media screen and (max-width: mediaQuery) {
@@ -111,6 +129,7 @@
   .img {
     order: 1;
     flex-basis: 100%;
+    min-height: 24rem;
   }
 
   .loginContainer {
@@ -118,7 +137,7 @@
     flex-basis: 100%;
   }
   .imgTwitterIcon {
-    width: 15rem;
+    width: 12rem;
     height: 15rem;
   }
 }

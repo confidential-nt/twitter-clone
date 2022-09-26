@@ -1,5 +1,5 @@
 @value twitterBlack, twitterWhite, twitterGrey, twitterAlphaGrey from "../../common/colors.css";
-
+@value mediaQuery from "../../common/size.css";
 .modalShade {
   position: fixed;
   top: 0;
@@ -21,6 +21,7 @@
   z-index: 1;
   border-radius: 1rem;
   width: 44rem;
+  min-width: 35rem;
   opacity: 1;
 }
 
@@ -42,4 +43,18 @@
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+}
+
+@media screen and (max-width: calc(mediaQuery + 10rem)) {
+  .modalShade {
+    background-color: #3e4143;
+  }
+}
+
+@media screen and (max-width: mediaQuery) {
+  .modalContainer {
+    width: 100vw;
+    height: 100vh;
+    border-radius: inherit;
+  }
 }
