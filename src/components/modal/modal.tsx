@@ -34,7 +34,7 @@ const Modal = ({ closeListener, display, children }: Props) => {
 
 export default Modal;
 
-// 2. 기존 이메일과의 연결
+// 2. 기존 이메일과의 연결 *
 // 4. 트위터 성능개선을 위한 공부
 
 // 6. 선생님이 알려준 컴포넌트 라이브러리 공부 -> 스타일을 어떻게 외부에서 적용하는지..
