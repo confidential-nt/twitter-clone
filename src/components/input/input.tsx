@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./input.module.css";
 import BubbleMessage from "../message/bubble-message";
-import { LoginInfo } from "../login-form/login-form";
 
 type Props = {
   type: React.HTMLInputTypeAttribute;
@@ -9,7 +8,7 @@ type Props = {
   placeholder?: string;
   className?: string;
   inputRef: React.RefObject<HTMLInputElement | HTMLDivElement>;
-  onInputListener?: (loginInfo: LoginInfo) => void;
+  onInputListener?: () => void;
   tabIndex?: number;
   onType?: (text: string) => void;
   inputMessage: string;
@@ -46,13 +45,13 @@ const Input = ({
     }
 
     if (value) {
-      const text = value;
       onBlank && onBlank(false);
-      onType && onType(text);
-      onInputListener && onInputListener({ infoType: type, value: text });
+      onType && onType(value);
     } else {
       onBlank && onBlank(true);
     }
+
+    onInputListener && onInputListener();
   };
 
   const onInputBlur = () => {
