@@ -3,6 +3,8 @@ import Input from "../input/input";
 import Button from "../button/button";
 import Auth, { ResultState } from "../../service/auth";
 import styles from "./login-form.module.css";
+import EmailInput from "../input/email-input";
+import PasswordInput from "../input/password-input";
 
 type Props = {
   auth: Auth;
@@ -51,18 +53,16 @@ const LoginForm = ({ auth, onSubmitForm }: Props) => {
   return (
     <div className={styles.loginFormContainer}>
       <h2 className={styles.formTitle}>트위터에 로그인하기</h2>
-      <form onSubmit={onSubmit}>
-        <Input
+      <form onSubmit={onSubmit} className={styles.loginForm}>
+        <EmailInput
           className={styles.input}
           placeholder="사용자 이메일을 입력하세요."
-          type="email"
           onInputListener={onInput}
           inputRef={useRef<HTMLDivElement>(null)}
           name="email"
         />
-        <Input
+        <PasswordInput
           className={styles.input}
-          type="password"
           placeholder="비밀번호를 입력하세요."
           onInputListener={onInput}
           inputRef={useRef<HTMLInputElement>(null)}

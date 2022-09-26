@@ -11,6 +11,11 @@ type Props = {
   inputRef: React.RefObject<HTMLInputElement | HTMLDivElement>;
   onInputListener?: (loginInfo: LoginInfo) => void;
   tabIndex?: number;
+  onType?: (text: string) => void;
+  inputMessage: string;
+  onBlank?: (isBlank: boolean) => void;
+  onBlur?: () => void;
+  blank?: boolean;
 };
 
 const Input = ({
@@ -21,32 +26,12 @@ const Input = ({
   inputRef,
   onInputListener,
   tabIndex,
+  onType,
+  inputMessage,
+  onBlank,
+  onBlur,
+  blank,
 }: Props) => {
-  const [blank, setBlank] = useState(true);
-  const [inputMessage, setInputMessage] = useState<string>("");
-
-  const isValidateEmail = (email: string) => {
-    return Boolean(
-      email.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-    );
-  };
-
-  const isValidatePassword = (password: string) => {
-    return password.length > 6;
-  };
-
-  const isValidate = (value: string) => {
-    if (type === "email" && !isValidateEmail(value)) {
-      setInputMessage("유효하지 않은 이메일 입니다.");
-    } else if (type === "password" && !isValidatePassword(value)) {
-      setInputMessage("유효하지 않은 비밀번호 입니다.");
-    } else {
-      setInputMessage("");
-    }
-  };
-
   const onInput = (e: any) => {
     if (!inputRef.current) return;
 
@@ -62,24 +47,22 @@ const Input = ({
 
     if (value) {
       const text = value;
-
-      setBlank(false);
-      isValidate(text);
+      onBlank && onBlank(false);
+      onType && onType(text);
       onInputListener && onInputListener({ infoType: type, value: text });
     } else {
-      setBlank(true);
-      setInputMessage("값을 입력해주세요.");
+      onBlank && onBlank(true);
     }
   };
 
-  const onBlur = () => {
-    setInputMessage("");
+  const onInputBlur = () => {
+    onBlur && onBlur();
   };
 
   return (
     <div
       className={`${styles.inputContainer} ${className ? className : ""}`}
-      onBlur={onBlur}
+      onBlur={onInputBlur}
       tabIndex={tabIndex ? tabIndex : 0}
       onInput={onInput}
     >
@@ -94,7 +77,7 @@ const Input = ({
           type="password"
           className={styles.passwordInput}
           ref={inputRef! as React.RefObject<HTMLInputElement>}
-          placeholder="비밀번호를 입력하세요."
+          placeholder={placeholder ? placeholder : ""}
           name={name}
         />
       ) : (

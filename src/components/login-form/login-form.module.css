@@ -4,11 +4,11 @@
   margin-bottom: 1.4em;
 }
 
-.loginFormContainer .input:first-child {
+.loginForm .input:first-child {
   margin-bottom: 1rem;
 }
 
-.loginFormContainer .input:nth-child(2) {
+.loginForm .input:nth-child(2) {
   margin-bottom: 8rem;
 }
 
