@@ -126,7 +126,6 @@ export const Login = ({
         />
       </div>
       <div className={styles.img}>
-        <img src="/loginimg.png" alt="img" />
         <FontAwesomeIcon
           icon={brands("twitter")}
           className={styles.imgTwitterIcon}

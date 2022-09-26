@@ -8,8 +8,7 @@ type Props = { auth: Auth; onToggleModal: (modalState: boolean) => void };
 const Home = ({ auth, onToggleModal }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
-  //   const state = location.state as { userId?: string };
-  //   const userId = state?.userId;
+
   const user = firebaseAuth.currentUser;
 
   useEffect(() => {

@@ -29,39 +29,60 @@ function App({ auth }: Props) {
   };
 
   return (
-    <main className={styles.main}>
-      <Routes>
-        <Route
-          path="/home"
-          element={<Home auth={auth} onToggleModal={onToggleModal} />}
-        ></Route>
-        <Route
-          path="/login"
-          element={
-            <Login
-              auth={auth}
-              errorPopupState={errorPopupState}
-              onUpdateErrorPopupState={updateErrorPopupState}
-              onToggleModal={onToggleModal}
-              displayModal={displayModal}
-            />
-          }
-        ></Route>
-        <Route
-          path="/"
-          element={
-            <Login
-              auth={auth}
-              errorPopupState={errorPopupState}
-              onUpdateErrorPopupState={updateErrorPopupState}
-              onToggleModal={onToggleModal}
-              displayModal={displayModal}
-            />
-          }
-        ></Route>
-      </Routes>
-      <SquareMessage message={getErrorMessage(errorPopupState)} />
-    </main>
+    <>
+      <main className={styles.main}>
+        <Routes>
+          <Route
+            path="/home"
+            element={<Home auth={auth} onToggleModal={onToggleModal} />}
+          ></Route>
+          <Route
+            path="/login"
+            element={
+              <Login
+                auth={auth}
+                errorPopupState={errorPopupState}
+                onUpdateErrorPopupState={updateErrorPopupState}
+                onToggleModal={onToggleModal}
+                displayModal={displayModal}
+              />
+            }
+          ></Route>
+          <Route
+            path="/"
+            element={
+              <Login
+                auth={auth}
+                errorPopupState={errorPopupState}
+                onUpdateErrorPopupState={updateErrorPopupState}
+                onToggleModal={onToggleModal}
+                displayModal={displayModal}
+              />
+            }
+          ></Route>
+        </Routes>
+        <SquareMessage message={getErrorMessage(errorPopupState)} />
+      </main>
+      <footer>
+        <ul>
+          <li>
+            <a href="#">소개</a>
+          </li>
+          <li>
+            <a href="#">고객센터</a>
+          </li>
+          <li>
+            <a href="#">이용약관</a>
+          </li>
+          <li>
+            <a href="#">쿠키정책</a>
+          </li>
+          <li>
+            <a href="#">광고정보</a>
+          </li>
+        </ul>
+      </footer>
+    </>
   );
 }
 

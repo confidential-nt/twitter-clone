@@ -31,7 +31,7 @@ const Input = ({
   onBlur,
   blank,
 }: Props) => {
-  const onInput = (e: any) => {
+  const onInput = () => {
     if (!inputRef.current) return;
 
     let current;

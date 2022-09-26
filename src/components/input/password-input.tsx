@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-// import { LoginInfo } from "../login-form/login-form";
 import Input from "./input";
 
 type Props = {
