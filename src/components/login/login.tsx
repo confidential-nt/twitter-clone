@@ -115,7 +115,13 @@ export const Login = ({
         </div>
         <Modal
           display={displayModal}
-          component={<LoginForm auth={auth} onSubmitForm={onSubmit} />}
+          component={
+            <LoginForm
+              auth={auth}
+              onSubmitForm={onSubmit}
+              onUpdateErrorPopupState={onUpdateErrorPopupState}
+            />
+          }
           closeListener={toggleModal}
         />
       </div>

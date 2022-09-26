@@ -9,10 +9,11 @@ import PasswordInput from "../input/password-input";
 type Props = {
   auth: Auth;
   onSubmitForm: (result: ResultState) => Promise<void>;
+  onUpdateErrorPopupState: (errorMessage: string) => void;
 };
 
 // 사람들이 이 컴포넌트를 로그인 폼을 만들기 위해 사용한다고 생각해보면...
-const LoginForm = ({ auth, onSubmitForm }: Props) => {
+const LoginForm = ({ auth, onSubmitForm, onUpdateErrorPopupState }: Props) => {
   const [isLoginable, setloginable] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -27,6 +28,8 @@ const LoginForm = ({ auth, onSubmitForm }: Props) => {
     if (email && password) {
       const result = await auth.loginWithEmailandPassword(email, password);
       onSubmitForm(result);
+    } else {
+      onUpdateErrorPopupState("잘못된 접근입니다.");
     }
   };
 
