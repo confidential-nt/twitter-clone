@@ -1,0 +1,17 @@
+@value twitterBlack, twitterWhite, twitterBlue from "../../common/colors.css";
+
+.textarea {
+  resize: none;
+  background-color: twitterBlack;
+  color: twitterWhite;
+  border: none;
+}
+
+.textarea::placeholder {
+  color: twitterWhite;
+}
+
+.textarea:focus {
+  outline: none;
+  border: none;
+}

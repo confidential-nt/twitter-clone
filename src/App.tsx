@@ -8,10 +8,11 @@ import styles from "./app.module.css";
 import SquareMessage from "./components/message/square-message";
 import { getErrorMessage } from "./other/error";
 import useScroll from "./hook/use-scroll";
+import TweetRepository from "./service/tweet-repository";
 
-type Props = { auth: Auth };
+type Props = { auth: Auth; tweetRepository: TweetRepository };
 
-function App({ auth }: Props) {
+function App({ auth, tweetRepository }: Props) {
   const [errorPopupState, setErrorPopupState] = useState<string>("");
   const [displayModal, setModalDisplay] = useState<boolean>(false);
 
@@ -35,7 +36,13 @@ function App({ auth }: Props) {
         <Routes>
           <Route
             path="/home"
-            element={<Home auth={auth} onToggleModal={onToggleModal} />}
+            element={
+              <Home
+                auth={auth}
+                onToggleModal={onToggleModal}
+                tweetRepository={tweetRepository}
+              />
+            }
           ></Route>
           <Route
             path="/login"

@@ -8,6 +8,8 @@ export const getErrorMessage = (code: string) => {
       return "비정상적인 접근입니다.";
     case "auth/weak-password":
       return "유효하지 않은 비밀번호 입니다.";
+    case "auth/email-already-use":
+      return "중복된 이메일 입니다.";
     default:
       return getAlternativeErrorMessage(code);
   }

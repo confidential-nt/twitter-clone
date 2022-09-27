@@ -35,7 +35,11 @@ const LoginForm = ({ auth, onSubmitForm, onUpdateErrorPopupState }: Props) => {
   };
 
   const onInput = () => {
-    if (emailRef.current?.textContent && passwordRef.current?.value) {
+    if (
+      emailRef.current?.textContent &&
+      passwordRef.current?.value &&
+      passwordRef.current?.value.length > 6
+    ) {
       setloginable(true);
     } else setloginable(false);
   };

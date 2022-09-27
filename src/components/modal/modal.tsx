@@ -9,7 +9,6 @@ type Props = {
   closeListener: onCloseListener;
   display: boolean;
   children?: React.ReactNode;
-  // buttonRef: React.Ref<HTMLButtonElement>;
 };
 
 const Modal = ({ closeListener, display, children }: Props) => {
@@ -33,14 +32,3 @@ const Modal = ({ closeListener, display, children }: Props) => {
 };
 
 export default Modal;
-
-// 2. 기존 이메일과의 연결 *
-// 4. 트위터 성능개선을 위한 공부
-
-// 6. 선생님이 알려준 컴포넌트 라이브러리 공부 -> 스타일을 어떻게 외부에서 적용하는지..
-
-// 8. https://github.com/reactjs/react-modal/blob/master/src/components/Modal.js
-// 9. 반응형
-
-// 1212. 타입도 나중에 수정해야할듯. 치트시트 보면서
-// 23123. 중복로직 줄이기

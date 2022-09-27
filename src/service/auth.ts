@@ -1,7 +1,9 @@
 import {
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
   GithubAuthProvider,
   GoogleAuthProvider,
+  linkWithPopup,
   NextOrObserver,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -12,7 +14,7 @@ import {
 
 import { firebaseAuth } from "./firebase";
 
-type ProviderName = "Google" | "Github";
+type ProviderName = "Google" | "Github" | "google.com" | "github.com";
 
 type SuccessState = {
   state: "success";
@@ -32,6 +34,7 @@ class Auth {
       const ProviderClass = this.getProvider(providerName);
       const provider = new ProviderClass();
       const result = await signInWithPopup(firebaseAuth, provider);
+
       return {
         state: "success",
         user: result.user,
@@ -71,6 +74,7 @@ class Auth {
         email,
         password
       );
+
       return {
         state: "success",
         user: userCredential.user,
@@ -89,7 +93,11 @@ class Auth {
     switch (providerName) {
       case "Google":
         return GoogleAuthProvider;
+      case "google.com":
+        return GoogleAuthProvider;
       case "Github":
+        return GithubAuthProvider;
+      case "github.com":
         return GithubAuthProvider;
       default:
         throw new Error(`unknown providerName : ${providerName}`);
@@ -99,6 +107,8 @@ class Auth {
   handleStateChange(callback: NextOrObserver<User>) {
     onAuthStateChanged(firebaseAuth, callback);
   }
+
+  // 홈 구현하고 나면 linkWithOtherSignInMethod...
 }
 
 export default Auth;
