@@ -17,16 +17,24 @@ type Props = {
   item: TweetItemType;
   onDropdownOpen: (selected: string) => void;
   selectedDropdown: string | null;
+  onDeleteTweet: (tweet: TweetItemType) => void;
 };
 
-const TweetItem = ({ item, onDropdownOpen, selectedDropdown }: Props) => {
-  const dropdownRef = useRef<HTMLUListElement>(null);
-
+const TweetItem = ({
+  item,
+  onDropdownOpen,
+  selectedDropdown,
+  onDeleteTweet,
+}: Props) => {
   const onClickDropdownBtn = (e: React.PointerEvent<HTMLButtonElement>) => {
     const target = e.target! as HTMLButtonElement;
+    const clickedBtn =
+      target.tagName === "BUTTON"
+        ? target
+        : (target.parentElement! as HTMLButtonElement);
 
     if (!selectedDropdown) {
-      onDropdownOpen(target.id);
+      onDropdownOpen(clickedBtn.id);
     }
   };
 
@@ -45,7 +53,9 @@ const TweetItem = ({ item, onDropdownOpen, selectedDropdown }: Props) => {
             <span>· {getTimeDiff(item.timestamp)}</span>
           </div>
           <Button
-            className={`${styles.btn} ${styles.dropdownBtn}`}
+            className={`${styles.btn} ${styles.dropdownBtn} ${
+              `${item.timestamp}` === selectedDropdown ? styles.active : ""
+            }`}
             textContent=""
             font={faEllipsis}
             clickable={true}
@@ -59,7 +69,8 @@ const TweetItem = ({ item, onDropdownOpen, selectedDropdown }: Props) => {
           </Button>
           <Dropdown
             isOpen={`${item.timestamp}` === selectedDropdown}
-            dropdownRef={dropdownRef}
+            onDeleteTweet={onDeleteTweet}
+            item={item}
           />
         </header>
         <article className={styles.content}>

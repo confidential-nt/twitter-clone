@@ -33,7 +33,6 @@ const Home = ({ auth, onToggleModal, tweetRepository }: Props) => {
   };
 
   const onDropdownOpen = (selected: string) => {
-    console.log(selected);
     setSelectedDropdown(selected);
   };
 

@@ -6,21 +6,30 @@ type Props = {
   items: Partial<TweetItemsType>;
   onDropdownOpen: (selected: string) => void;
   selectedDropdown: string | null;
+  onDeleteTweet: (tweet: TweetItemType) => void;
 };
 
-const TweetItems = ({ items, onDropdownOpen, selectedDropdown }: Props) => (
+const TweetItems = ({
+  items,
+  onDropdownOpen,
+  selectedDropdown,
+  onDeleteTweet,
+}: Props) => (
   <ul>
-    {Object.values(items).map(
-      (item) =>
-        item && (
-          <TweetItem
-            item={item}
-            key={item.timestamp}
-            onDropdownOpen={onDropdownOpen}
-            selectedDropdown={selectedDropdown}
-          />
-        )
-    )}
+    {Object.values(items)
+      .reverse()
+      .map(
+        (item) =>
+          item && (
+            <TweetItem
+              item={item}
+              key={item.timestamp}
+              onDropdownOpen={onDropdownOpen}
+              selectedDropdown={selectedDropdown}
+              onDeleteTweet={onDeleteTweet}
+            />
+          )
+      )}
   </ul>
 );
 

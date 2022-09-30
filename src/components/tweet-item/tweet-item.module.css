@@ -48,7 +48,7 @@ svg {
 .itemHeader .btn,
 .btnsContainer .btn {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   text-align: right;
   background-color: twitterBlack;
@@ -75,10 +75,6 @@ svg {
 
 .itemHeader .btn {
   padding: 0 0.8em 0.8em 0.8em;
-}
-
-.dropdownBtn * {
-  pointer-events: none;
 }
 
 .overlay {

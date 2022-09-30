@@ -22,6 +22,7 @@ export type TweetItemType = {
   like: number;
   timestamp: number;
   imgSrc?: string;
+  id?: string;
 };
 
 export type TweetItemsType = {
@@ -50,16 +51,23 @@ const Tweet = ({
   }, [tweetRepository, userID]);
 
   const onAddTweet = async (tweet: TweetItemType) => {
+    const id = tweetRepository.getItemID(userID)! as string;
+    tweet.id = id;
+
     const newItems = { ...tweetItems };
-    newItems[tweet.timestamp] = tweet;
+    newItems[tweet.id] = tweet;
     setTweetItems(newItems);
 
-    if (userID) {
-      await tweetRepository.writeTweet(userID, tweet);
-    }
+    await tweetRepository.writeTweet(userID, tweet);
   };
 
-  const onDeleteTweet = () => {};
+  const onDeleteTweet = async (tweet: TweetItemType) => {
+    const newItems = { ...tweetItems };
+    delete newItems[tweet.id! as string];
+    setTweetItems(newItems);
+
+    await tweetRepository.removeTweets(userID, tweet);
+  };
 
   return (
     <section className={styles.section}>
@@ -71,6 +79,7 @@ const Tweet = ({
         items={tweetItems}
         onDropdownOpen={onDropdownOpen}
         selectedDropdown={selectedDropdown}
+        onDeleteTweet={onDeleteTweet}
       />
     </section>
   );
