@@ -9,7 +9,8 @@ import { brands } from "@fortawesome/fontawesome-svg-core/import.macro";
 import Auth, { ResultState } from "../../service/auth";
 import { useNavigate } from "react-router-dom";
 import { User } from "firebase/auth";
-import { getTimeStampArr } from "../../other/timestamp";
+import { getTimeStampArr } from "../../other/time";
+import Footer from "../footer/footer";
 
 type Props = {
   auth: Auth;
@@ -84,88 +85,100 @@ export const Login = ({
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.loginContainer}>
-        <FontAwesomeIcon
-          icon={brands("twitter")}
-          className={styles.loginTwitterIcon}
-          size={"3x"}
-        />
-        <h2 className={styles.title}>지금 일어나고 있는 일</h2>
-        <strong>오늘 트위터에 가입하세요.</strong>
-        <div className={styles.btnContainer}>
-          <Button
-            textContent="Google 계정으로 로그인"
-            font={brands("google")}
-            buttonName="Google"
-            onClick={onClickBtn}
-            btnBackgroundColor={"btn-bg-white"}
-            btnFontColor={"btn-font-black"}
-            className={styles.googleLoginBtn}
-            clickable={true}
+    <>
+      <div className={styles.container}>
+        <div className={styles.loginContainer}>
+          <FontAwesomeIcon
+            icon={brands("twitter")}
+            className={styles.loginTwitterIcon}
+            size={"3x"}
           />
-          <Button
-            textContent="Github 계정으로 로그인"
-            font={brands("github")}
-            buttonName="Github"
-            onClick={onClickBtn}
-            btnBackgroundColor={"btn-bg-white"}
-            btnFontColor={"btn-font-black"}
-            className={styles.githubLoginBtn}
-            clickable={true}
-          />
-          <span className={styles.or}>또는</span>
-          <Button
-            textContent="이메일 주소로 가입하기"
-            font={brands("twitter")}
-            buttonName="JoinTwitter"
-            onClick={toggleModal}
-            btnBackgroundColor={"btn-bg-blue"}
-            btnFontColor={"btn-font-white"}
-            className={styles.twitterJoinBtn}
-            clickable={true}
-            id={ITEM_IDS[0]}
-          />
-          <span className={styles.ask}>이미 트위터에 가입하셨나요?</span>
-          <Button
-            textContent="로그인"
-            buttonName="LoginTwitter"
-            onClick={toggleModal}
-            btnBackgroundColor={"btn-bg-black"}
-            btnFontColor={"btn-font-blue"}
-            className={styles.twitterLoginBtn}
-            clickable={true}
-            id={ITEM_IDS[1]}
+          <h2 className={styles.title}>지금 일어나고 있는 일</h2>
+          <strong>오늘 트위터에 가입하세요.</strong>
+          <div className={styles.btnContainer}>
+            <Button
+              textContent="Google 계정으로 로그인"
+              font={brands("google")}
+              buttonName="Google"
+              onClick={onClickBtn}
+              btnBackgroundColor={"btn-bg-white"}
+              btnFontColor={"btn-font-black"}
+              logoCssStyle={{
+                marginRight: "0.5em",
+              }}
+              className={styles.googleLoginBtn}
+              clickable={true}
+            />
+            <Button
+              textContent="Github 계정으로 로그인"
+              font={brands("github")}
+              buttonName="Github"
+              onClick={onClickBtn}
+              btnBackgroundColor={"btn-bg-white"}
+              btnFontColor={"btn-font-black"}
+              logoCssStyle={{
+                marginRight: "0.5em",
+              }}
+              className={styles.githubLoginBtn}
+              clickable={true}
+            />
+            <span className={styles.or}>또는</span>
+            <Button
+              textContent="이메일 주소로 가입하기"
+              font={brands("twitter")}
+              buttonName="JoinTwitter"
+              onClick={toggleModal}
+              btnBackgroundColor={"btn-bg-blue"}
+              btnFontColor={"btn-font-white"}
+              logoCssStyle={{
+                marginRight: "0.5em",
+              }}
+              className={styles.twitterJoinBtn}
+              clickable={true}
+              id={ITEM_IDS[0]}
+            />
+            <span className={styles.ask}>이미 트위터에 가입하셨나요?</span>
+            <Button
+              textContent="로그인"
+              buttonName="LoginTwitter"
+              onClick={toggleModal}
+              btnBackgroundColor={"btn-bg-black"}
+              btnFontColor={"btn-font-blue"}
+              className={styles.twitterLoginBtn}
+              clickable={true}
+              id={ITEM_IDS[1]}
+            />
+          </div>
+          <Modal
+            display={currentItemId === ITEM_IDS[0]}
+            closeListener={toggleModal}
+          >
+            <JoinForm
+              auth={auth}
+              onSubmitForm={onJoinSubmit}
+              onUpdateErrorPopupState={onUpdateErrorPopupState}
+            />
+          </Modal>
+          <Modal
+            display={currentItemId === ITEM_IDS[1]}
+            closeListener={toggleModal}
+          >
+            <LoginForm
+              auth={auth}
+              onSubmitForm={onLoginSubmit}
+              onUpdateErrorPopupState={onUpdateErrorPopupState}
+            />
+          </Modal>
+        </div>
+        <div className={styles.img}>
+          <FontAwesomeIcon
+            icon={brands("twitter")}
+            className={styles.imgTwitterIcon}
           />
         </div>
-        <Modal
-          display={currentItemId === ITEM_IDS[0]}
-          closeListener={toggleModal}
-        >
-          <JoinForm
-            auth={auth}
-            onSubmitForm={onJoinSubmit}
-            onUpdateErrorPopupState={onUpdateErrorPopupState}
-          />
-        </Modal>
-        <Modal
-          display={currentItemId === ITEM_IDS[1]}
-          closeListener={toggleModal}
-        >
-          <LoginForm
-            auth={auth}
-            onSubmitForm={onLoginSubmit}
-            onUpdateErrorPopupState={onUpdateErrorPopupState}
-          />
-        </Modal>
       </div>
-      <div className={styles.img}>
-        <FontAwesomeIcon
-          icon={brands("twitter")}
-          className={styles.imgTwitterIcon}
-        />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

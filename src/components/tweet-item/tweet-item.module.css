@@ -1,0 +1,132 @@
+@value twitterAlphaGrey, twitterGrey, twitterBlack, twitterWhite, twiiterAlphaBlue, twitterBlue from "../../common/colors.css";
+
+svg {
+  margin-right: 0;
+}
+
+.item {
+  display: flex;
+
+  border-bottom: 1px solid twitterAlphaGrey;
+  padding: 1em 0.7em;
+}
+
+.userProfile {
+  width: 2.7rem;
+  height: 2.7rem;
+  margin-right: 1em;
+  flex-basis: 8%;
+}
+
+.itemMain {
+  flex-grow: 1;
+  flex-basis: 92%;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.itemHeader strong:nth-child(2) {
+  color: twitterGrey;
+  font-weight: 400;
+}
+.itemHeader span:last-child {
+  color: twitterGrey;
+}
+
+.content p {
+  white-space: break-spaces;
+}
+.btnsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.itemHeader .btn,
+.btnsContainer .btn {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  text-align: right;
+  background-color: twitterBlack;
+  color: twitterGrey;
+  position: relative;
+}
+
+.itemHeader .btn:hover,
+.btnsContainer .btn:hover {
+  color: twitterBlue;
+  transition: color ease-in-out 0.2s;
+}
+
+.btnsContainer .btn:nth-child(2):hover {
+  color: #00ba7c;
+}
+.btnsContainer .btn:nth-child(3):hover {
+  color: #f9197f;
+}
+
+.btnsContainer .btn {
+  padding: 0.8em 0.8em 0em 0;
+}
+
+.itemHeader .btn {
+  padding: 0 0.8em 0.8em 0.8em;
+}
+
+.dropdownBtn * {
+  pointer-events: none;
+}
+
+.overlay {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  border-radius: 50%;
+  transition: background-color ease-in-out 0.1s;
+}
+
+.overlay:hover {
+  background-color: twiiterAlphaBlue;
+}
+
+.btnsContainer .btn .overlay {
+  left: -59%;
+  transform: translateX(17.5%);
+}
+
+.btnsContainer .btn:nth-child(2) .overlay {
+  transform: translateX(20%);
+}
+.btnsContainer .btn:nth-child(2) .overlay:hover {
+  background-color: #00ba7c54;
+}
+.btnsContainer .btn:nth-child(3) .overlay {
+  transform: translateX(16%);
+}
+.btnsContainer .btn:nth-child(3) .overlay:hover {
+  background-color: #f9197e4d;
+}
+
+.itemHeader .btn .overlay {
+  left: -59%;
+  transform: translateX(62%);
+}
+
+.imgContainer {
+  width: 100%;
+  height: 16rem;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  border-radius: 1rem;
+}
+
+.imgContainer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

@@ -1,17 +1,61 @@
-@value twitterBlack, twitterWhite, twitterBlue from "../../common/colors.css";
+@value twitterBlack, twitterWhite, twitterBlue, twitterGrey,twitterAlphaGrey, twitterDisabledBlue from "../../common/colors.css";
+
+.addFormContainer {
+  display: flex;
+
+  border-bottom: 1px solid twitterAlphaGrey;
+  padding: 1em 0.7em;
+}
+
+.userProfile {
+  width: 2.7rem;
+  height: 2.7rem;
+  margin-right: 1em;
+}
+
+.form {
+  flex-grow: 1;
+}
 
 .textarea {
+  display: block;
   resize: none;
   background-color: twitterBlack;
   color: twitterWhite;
   border: none;
+  width: 100%;
+  overflow: hidden;
+  font-size: 1.2rem;
+  min-height: 5rem;
 }
 
 .textarea::placeholder {
-  color: twitterWhite;
+  color: twitterGrey;
+  font-size: 1.2rem;
 }
 
 .textarea:focus {
   outline: none;
   border: none;
+}
+
+.btnContainer {
+  padding-top: 1em;
+  border-top: 1px solid twitterAlphaGrey;
+}
+
+.btnContainer .addBtn {
+  justify-self: end;
+  margin: 0 0 0 auto;
+  padding: 0.7em 1.2em;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.btnContainer .addBtn:disabled {
+  background-color: twitterDisabledBlue;
+}
+
+.btnContainer .addBtn:disabled:hover {
+  background-color: twitterDisabledBlue;
 }

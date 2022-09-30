@@ -1,0 +1,21 @@
+@value twitterGrey, twitterAlphaGrey from "../../common/colors.css";
+
+.heading {
+  padding: 0.7em 0.7em 0.9em 0.7em;
+  font-size: 0.8rem;
+
+  position: fixed;
+  top: 0;
+  width: 35.8rem;
+  background-color: rgba(0, 0, 0, 0.362);
+  z-index: 11;
+  backdrop-filter: blur(3px);
+}
+
+.section {
+  max-width: 36rem;
+  border: twitterGrey;
+  padding-top: 3rem;
+  border-left: 1px solid twitterAlphaGrey;
+  border-right: 1px solid twitterAlphaGrey;
+}

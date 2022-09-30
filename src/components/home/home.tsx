@@ -5,6 +5,7 @@ import MenuItems from "../menu-items/menu-items";
 import Tweet from "../tweet/tweet";
 import Explore from "../explore/explore";
 import TweetRepository from "../../service/tweet-repository";
+import styles from "./home.module.css";
 
 type Props = {
   auth: Auth;
@@ -25,6 +26,17 @@ const Home = ({ auth, onToggleModal, tweetRepository }: Props) => {
 
   const [userID, setUserID] = useState<string>(locateStateUserID);
 
+  const [selectedDropdown, setSelectedDropdown] = useState<string | null>(null);
+
+  const onClick = (e: React.PointerEvent<HTMLDivElement>) => {
+    setSelectedDropdown(null);
+  };
+
+  const onDropdownOpen = (selected: string) => {
+    console.log(selected);
+    setSelectedDropdown(selected);
+  };
+
   useEffect(() => {
     if (!userID) {
       navigate("/login");
@@ -35,12 +47,25 @@ const Home = ({ auth, onToggleModal, tweetRepository }: Props) => {
 
   return (
     <>
+      <div
+        className={selectedDropdown ? `${styles.shade}` : ""}
+        onClick={onClick}
+      ></div>
+
       <MenuItems />
-      <Tweet tweetRepository={tweetRepository} userID={userID} />
+      <Tweet
+        tweetRepository={tweetRepository}
+        userID={userID}
+        onDropdownOpen={onDropdownOpen}
+        selectedDropdown={selectedDropdown}
+      />
       <Explore />
     </>
   );
 };
+// 1. 메뉴버튼을 클릭하면
+// 2. 드롭다운이 뜨게 할거야.
+// 3. 드롭다운 말고 그 이외의 부분을 클릭하면 드롭다운이 사라지게 만들거야.
 
 export default Home;
 

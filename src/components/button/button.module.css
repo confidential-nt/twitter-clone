@@ -1,4 +1,4 @@
-@value twitterBlue, twitterWhite, twitterBlack, twitterGrey from "../../common/colors.css";
+@value twitterBlue, twitterWhite, twitterBlack, twitterGrey, twitterRed from "../../common/colors.css";
 
 button {
   display: block;
@@ -19,8 +19,12 @@ button {
   background-color: twitterGrey;
 }
 
-.btnLogo {
+.logo-with-margin {
   margin-right: 0.5em;
+}
+
+.logo-with-no-margin {
+  margin-right: 0;
 }
 
 .btn-bg-blue {
@@ -45,4 +49,7 @@ button {
 
 .btn-font-blue {
   color: twitterBlue;
+}
+.btn-font-red {
+  color: twitterRed;
 }

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Button from "../button/button";
 import { TweetItemType } from "../tweet/tweet";
+import UserProfile from "../user-profile/user-profile";
 import styles from "./tweet-add-form.module.css";
 
 type Props = {
@@ -14,17 +15,24 @@ const TweetAddForm = ({ onAdd }: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const onInput = () => {
+    if (!textareaRef.current) return;
+
+    const textareaRefCurrent = textareaRef.current! as HTMLTextAreaElement;
+    textareaRefCurrent.style.height = textareaRef.current?.scrollHeight + "px";
+
     if (textareaRef.current?.value) {
       setAddable(true);
-    } else setAddable(false);
+    } else {
+      setAddable(false);
+      textareaRefCurrent.style.height = "5rem";
+    }
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const textareaRefCurrent = textareaRef.current! as HTMLTextAreaElement;
 
-    const content = textareaRef.current?.value
-      ? textareaRef.current?.value
-      : "";
+    const content = textareaRefCurrent.value ? textareaRefCurrent.value : "";
     const newItem: TweetItemType = {
       content,
       createdAt: new Date(),
@@ -37,24 +45,35 @@ const TweetAddForm = ({ onAdd }: Props) => {
     onAdd(newItem);
     formRef.current?.reset();
     setAddable(false);
+    textareaRefCurrent.style.height = "5rem";
   };
 
   return (
-    <form onSubmit={onSubmit} ref={formRef}>
-      <textarea
-        placeholder="무슨 일이 일어나고 있나요?"
-        className={styles.textarea}
-        onInput={onInput}
-        ref={textareaRef}
-      ></textarea>
-      <Button
-        textContent="트윗하기"
-        btnBackgroundColor="btn-bg-blue"
-        btnFontColor="btn-font-white"
-        clickable={isAddable}
-        type={"submit"}
+    <div className={styles.addFormContainer}>
+      <UserProfile
+        imgSrc="/logo192.png"
+        alt="유저 프로필 사진"
+        className={styles.userProfile}
       />
-    </form>
+      <form onSubmit={onSubmit} ref={formRef} className={styles.form}>
+        <textarea
+          placeholder="무슨 일이 일어나고 있나요?"
+          className={styles.textarea}
+          onInput={onInput}
+          ref={textareaRef}
+        ></textarea>
+        <div className={styles.btnContainer}>
+          <Button
+            textContent="트윗하기"
+            btnBackgroundColor="btn-bg-blue"
+            btnFontColor="btn-font-white"
+            clickable={isAddable}
+            type={"submit"}
+            className={styles.addBtn}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 
