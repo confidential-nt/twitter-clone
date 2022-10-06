@@ -39,6 +39,7 @@ svg {
 
 .content p {
   white-space: break-spaces;
+  word-break: break-all;
 }
 .btnsContainer {
   display: flex;

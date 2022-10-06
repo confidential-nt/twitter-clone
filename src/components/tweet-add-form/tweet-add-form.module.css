@@ -42,6 +42,34 @@
 .btnContainer {
   padding-top: 1em;
   border-top: 1px solid twitterAlphaGrey;
+  position: relative;
+}
+
+.tweetGagueWrap {
+  position: absolute;
+  right: 25%;
+  top: 50%;
+  transform: translateY(-25%);
+  width: 2rem;
+  height: 2rem;
+}
+
+.tweetGague {
+  transform: rotate(-90deg);
+}
+
+.gagueMeter,
+.gagueIng {
+  fill: none;
+}
+
+.gagueMeter {
+  stroke: twitterAlphaGrey;
+}
+
+.gagueIng {
+  stroke: twitterBlue;
+  stroke-linecap: round;
 }
 
 .btnContainer .addBtn {

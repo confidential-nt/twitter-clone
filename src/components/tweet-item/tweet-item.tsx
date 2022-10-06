@@ -54,7 +54,7 @@ const TweetItem = ({
           </div>
           <Button
             className={`${styles.btn} ${styles.dropdownBtn} ${
-              `${item.timestamp}` === selectedDropdown ? styles.active : ""
+              `${item.id}` === selectedDropdown ? styles.active : ""
             }`}
             textContent=""
             font={faEllipsis}
@@ -62,13 +62,13 @@ const TweetItem = ({
             logoCssStyle={{
               marginRight: "0",
             }}
-            id={`${item.timestamp}`}
+            id={`${item.id}`}
             onClick={onClickDropdownBtn}
           >
             <div className={styles.overlay}></div>
           </Button>
           <Dropdown
-            isOpen={`${item.timestamp}` === selectedDropdown}
+            isOpen={`${item.id}` === selectedDropdown}
             onDeleteTweet={onDeleteTweet}
             item={item}
           />

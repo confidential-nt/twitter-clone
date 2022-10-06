@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../button/button";
 import { TweetItemType } from "../tweet/tweet";
 import UserProfile from "../user-profile/user-profile";
@@ -8,13 +8,38 @@ type Props = {
   onAdd: (tweet: TweetItemType) => void;
 };
 
+const RADIUS = 12;
+const CIRCUMFERENCE = 2 * RADIUS * Math.PI;
+
 const TweetAddForm = ({ onAdd }: Props) => {
   const [isAddable, setAddable] = useState(false);
+  const [tweetLength, setTweetLength] = useState(0);
 
   const formRef = useRef<HTMLFormElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const gagueIngRef = useRef<SVGCircleElement>(null);
 
-  const onInput = () => {
+  const getDashOffset = (progress: number) => {
+    return CIRCUMFERENCE * (1 - progress);
+  };
+
+  const checkTweetLength = async (tweet: string) => {
+    setTweetLength(tweet.length);
+
+    if (!gagueIngRef.current) return;
+    if (!tweet.length) return;
+    const limit = 120;
+    if (tweet.length > limit) return;
+    const progress = tweet.length / limit;
+    const dashOffset = getDashOffset(progress);
+
+    gagueIngRef.current.style.strokeDashoffset = `${dashOffset}`;
+
+    if (tweet.length > limit) {
+    }
+  };
+
+  const onInput = async () => {
     if (!textareaRef.current) return;
 
     const textareaRefCurrent = textareaRef.current! as HTMLTextAreaElement;
@@ -22,9 +47,11 @@ const TweetAddForm = ({ onAdd }: Props) => {
 
     if (textareaRef.current?.value) {
       setAddable(true);
+      checkTweetLength(textareaRef.current?.value);
     } else {
       setAddable(false);
       textareaRefCurrent.style.height = "5rem";
+      checkTweetLength(textareaRef.current?.value);
     }
   };
 
@@ -63,6 +90,29 @@ const TweetAddForm = ({ onAdd }: Props) => {
           ref={textareaRef}
         ></textarea>
         <div className={styles.btnContainer}>
+          {tweetLength > 0 ? (
+            <div className={styles.tweetGagueWrap}>
+              <svg className={styles.tweetGague} width="2rem" height="2rem">
+                <circle
+                  className={styles.gagueMeter}
+                  cx="16"
+                  cy="16"
+                  r="8"
+                  strokeWidth={2}
+                />
+                <circle
+                  ref={gagueIngRef}
+                  className={styles.gagueIng}
+                  cx="16"
+                  cy="16"
+                  r="8"
+                  strokeWidth={2}
+                  strokeDashoffset={getDashOffset(0)}
+                  strokeDasharray={CIRCUMFERENCE}
+                />
+              </svg>
+            </div>
+          ) : null}
           <Button
             textContent="트윗하기"
             btnBackgroundColor="btn-bg-blue"

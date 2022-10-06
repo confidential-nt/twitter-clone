@@ -2,14 +2,8 @@ import { TweetItemsType, TweetItemType } from "./../components/tweet/tweet";
 import { firebaseDatabase } from "./firebase";
 import {
   DataSnapshot,
-  equalTo,
-  limitToLast,
-  onChildAdded,
-  onChildChanged,
   onValue,
-  orderByKey,
   push,
-  query,
   ref,
   remove,
   set,
